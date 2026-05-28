@@ -1,0 +1,739 @@
+/* ═══════════════════════════════════════════════════════════════
+   CSS GLOBAL SkyTech v5 — Paleta Refinada
+   Cole em: Site Administration → Design → Pages → Options → CSS
+   
+   PALETA:
+   --st-bg-deep    #0B111F  (fundo profundo)
+   --st-card       #161D2D  (cards, tabelas, área principal)
+   --st-header     #0F1626  (cabeçalhos, navbars, footers)
+   --st-border     rgba(122,162,247,0.08) (bordas sutis azuladas)
+   --st-accent     #5BA3F5  (azul primário)
+   --st-success    #7DD3A8  (verde)
+   --st-warning    #F5B461  (laranja)
+   --st-danger     #F47174  (vermelho)
+   --st-text-1     #E8ECF4  (primário)
+   --st-text-2     #B8C1D1  (secundário)
+   --st-text-3     #8B95A8  (terciário)
+   --st-text-mut   #6B7388  (muted)
+   --st-text-dis   #465064  (disabled)
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --st-bg:      #0B111F;
+  --st-header:  #0F1626;
+  --st-card:    #161D2D;
+  --st-border:  rgba(122,162,247,0.08);
+  --st-accent:  #5BA3F5;
+  --st-success: #7DD3A8;
+  --st-warning: #F5B461;
+  --st-danger:  #F47174;
+  --st-text:    #B8C1D1;
+  --st-text-pri:#E8ECF4;
+  --st-muted:   #6B7388;
+  --st-dim:     #465064;
+  --st-font:    "IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+}
+
+
+/* ════════════════════════════════════════════════
+   1. FUNDO GERAL
+   ════════════════════════════════════════════════ */
+
+html, body {
+  background: var(--st-bg) !important;
+  font-family: var(--st-font) !important;
+  color: var(--st-text) !important;
+}
+
+#wrapper,
+#main-content,
+#content,
+.portlet-layout,
+.portlet-column,
+.portlet-column-content,
+.portlet-column-content-first,
+.portlet-column-content-last,
+.container-fluid,
+.container-fluid-max-xl,
+.container-fluid-max-lg,
+.container-view {
+  background: var(--st-bg) !important;
+}
+
+.portlet-boundary,
+.portlet-content,
+.portlet-content-container,
+.portlet-body,
+.portlet-borderless-container {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.portlet-layout .portlet-column-content-first,
+.portlet-layout .portlet-column-content-last,
+.portlet-layout .portlet-column-content {
+  background: transparent !important;
+}
+
+
+/* ════════════════════════════════════════════════
+   2. NAVEGAÇÃO DO SITE
+   ════════════════════════════════════════════════ */
+
+.navigation-bar,
+.navigation-bar-secondary {
+  background: var(--st-header) !important;
+  border-bottom: 1px solid var(--st-border) !important;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.35) !important;
+}
+
+.navigation-bar .navbar-collapse {
+  background: var(--st-header) !important;
+}
+
+.navigation-bar .nav-link,
+.navigation-bar .nav-item > a {
+  color: var(--st-text) !important;
+  font-family: var(--st-font) !important;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+  padding: 12px 16px !important;
+  border-bottom: 2px solid transparent;
+}
+
+.navigation-bar .nav-link:hover,
+.navigation-bar .nav-item > a:hover {
+  color: var(--st-accent) !important;
+  background: transparent !important;
+}
+
+.navigation-bar .nav-link.active,
+.navigation-bar .nav-item.active > a,
+.navigation-bar .nav-item.selected > a {
+  color: var(--st-accent) !important;
+  font-weight: 700 !important;
+  border-bottom: 2px solid var(--st-accent) !important;
+  background: transparent !important;
+}
+
+
+/* ════════════════════════════════════════════════
+   2b. PORTLET DE LOGO (faixa entre control-menu e navbar)
+   ════════════════════════════════════════════════ */
+
+#portlet_com_liferay_site_logo_web_portlet_SiteLogoPortlet_,
+[id*="SiteLogoPortlet"],
+[id*="site_logo"],
+.portlet-boundary[class*="SiteLogoPortlet"],
+.portlet-boundary[class*="site_logo_web"],
+[class*="SiteLogoPortlet"],
+#content > .container-fluid:first-child,
+#content > .container-fluid-max-xl:first-child,
+#content > .portlet-layout:first-child,
+.portlet-layout:has(.portlet-boundary[class*="logo"]),
+.portlet-layout:has([id*="SiteLogoPortlet"]) {
+  background: var(--st-header) !important;
+  border-bottom: 1px solid var(--st-border) !important;
+}
+
+#portlet_com_liferay_site_logo_web_portlet_SiteLogoPortlet_ *,
+[id*="SiteLogoPortlet"] *,
+.portlet-boundary[class*="SiteLogoPortlet"] * {
+  background: transparent !important;
+}
+
+#content > .portlet-layout:first-of-type {
+  background: var(--st-header) !important;
+  border-bottom: 1px solid var(--st-border) !important;
+}
+
+/* Header e navbar do tema Dialect/Classic */
+header,
+.site-header,
+#banner,
+.banner,
+[class*="header"],
+[id*="header"] {
+  background: var(--st-header) !important;
+}
+
+.navbar-classic,
+.navbar.navbar-classic,
+.navbar-classic.navbar-top,
+header#banner,
+header#banner .navbar {
+  background: var(--st-header) !important;
+  border-bottom: 1px solid var(--st-border) !important;
+}
+
+.navbar-expand-md.navbar-light,
+.navbar-light,
+nav.navbar-light {
+  background: var(--st-header) !important;
+}
+
+.site-name,
+.navbar-brand,
+[class*="site-name"] {
+  color: var(--st-text-pri) !important;
+  font-family: var(--st-font) !important;
+  font-weight: 700;
+}
+
+
+/* ════════════════════════════════════════════════
+   3. BARRA DE CONTROLE (modo edição)
+   ════════════════════════════════════════════════ */
+
+.control-menu,
+.control-menu-container {
+  background: var(--st-header) !important;
+  border-bottom: 1px solid var(--st-border) !important;
+}
+
+.control-menu .control-menu-nav-item .control-menu-icon,
+.control-menu .btn-unstyled,
+.control-menu .nav-link {
+  color: var(--st-text) !important;
+}
+
+
+/* ════════════════════════════════════════════════
+   4. FOOTER
+   ════════════════════════════════════════════════ */
+
+footer, .site-footer, #footer {
+  background: var(--st-header) !important;
+  border-top: 1px solid var(--st-border) !important;
+  color: var(--st-muted) !important;
+}
+
+footer a, .site-footer a {
+  color: var(--st-muted) !important;
+  transition: color 0.2s;
+}
+
+footer a:hover, .site-footer a:hover {
+  color: var(--st-accent) !important;
+}
+
+
+/* ════════════════════════════════════════════════
+   5. SCROLLBAR
+   ════════════════════════════════════════════════ */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(91,163,245,0.25) var(--st-header);
+}
+
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-track { background: var(--st-header); }
+*::-webkit-scrollbar-thumb {
+  background: rgba(91,163,245,0.25);
+  border-radius: 3px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(91,163,245,0.5);
+}
+
+
+/* ════════════════════════════════════════════════
+   6. INTERFACE NATIVA DE OBJETOS — FDS (Frontend Data Set)
+   ════════════════════════════════════════════════ */
+
+.fds,
+.data-set-wrapper,
+.data-set-fluid,
+.data-set-content {
+  background: transparent !important;
+  color: var(--st-text) !important;
+}
+
+.data-set-wrapper {
+  background: var(--st-card) !important;
+  border: 1px solid var(--st-border) !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+}
+
+.container-fluid.container-xl.mt-3 {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.dnd-table,
+.dnd-table.fixed,
+div.dnd-table {
+  background: transparent !important;
+  width: 100% !important;
+}
+
+.dnd-thead,
+div.dnd-thead {
+  background: var(--st-bg) !important;
+}
+
+.dnd-tr,
+div.dnd-tr {
+  background: transparent !important;
+  border-bottom: 1px solid var(--st-border) !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.dnd-thead .dnd-tr {
+  background: var(--st-bg) !important;
+}
+
+.dnd-th,
+div.dnd-th,
+.dnd-th.content-renderer-actionLink,
+.dnd-th.content-renderer-link,
+.dnd-th.item-actions {
+  background: var(--st-bg) !important;
+  color: var(--st-muted) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  padding: 10px 16px !important;
+  border-bottom: 1px solid var(--st-border) !important;
+}
+
+.dnd-th .btn-unstyled,
+.dnd-th button {
+  color: var(--st-muted) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+}
+
+.dnd-tbody,
+div.dnd-tbody {
+  background: var(--st-card) !important;
+}
+
+.dnd-tbody .dnd-tr {
+  background: var(--st-card) !important;
+  border-bottom: 1px solid var(--st-border) !important;
+  transition: background 0.12s !important;
+}
+
+.dnd-tbody .dnd-tr:nth-child(even) {
+  background: rgba(255,255,255,0.02) !important;
+}
+
+.dnd-tbody .dnd-tr:hover {
+  background: rgba(91,163,245,0.07) !important;
+}
+
+.dnd-td,
+div.dnd-td,
+.dnd-tbody .dnd-th {
+  background: transparent !important;
+  color: var(--st-text) !important;
+  padding: 10px 16px !important;
+  font-size: 13px !important;
+  font-family: var(--st-font) !important;
+  border: none !important;
+}
+
+.dnd-td a,
+.dnd-tbody a {
+  color: var(--st-accent) !important;
+  text-decoration: none !important;
+}
+
+.data-set-pagination-wrapper,
+div.data-set-pagination-wrapper {
+  background: var(--st-header) !important;
+  border-top: 1px solid var(--st-border) !important;
+  padding: 8px 16px !important;
+}
+
+.data-set-pagination-wrapper *,
+.c-pagination-container * {
+  color: var(--st-muted) !important;
+  font-family: var(--st-font) !important;
+  font-size: 12px !important;
+}
+
+.data-set-pagination-wrapper .page-link,
+.c-pagination-container .page-link {
+  background: var(--st-card) !important;
+  border-color: var(--st-border) !important;
+  color: var(--st-text) !important;
+}
+
+.data-set-pagination-wrapper .active .page-link,
+.c-pagination-container .active .page-link {
+  background: var(--st-accent) !important;
+  border-color: var(--st-accent) !important;
+  color: #fff !important;
+}
+
+.data-set-pagination-wrapper select,
+.items-per-page select {
+  background: var(--st-card) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: var(--st-text) !important;
+  border-radius: 4px !important;
+}
+
+
+/* ════════════════════════════════════════════════
+   7. MANAGEMENT BAR (search + botão +)
+   ════════════════════════════════════════════════ */
+
+.management-bar-light,
+.management-bar.management-bar-light,
+nav.management-bar-light {
+  background: var(--st-header) !important;
+  border-bottom: 1px solid var(--st-border) !important;
+}
+
+.management-bar-light .navbar-form,
+.management-bar-light .nav-item,
+.management-bar-light .nav {
+  background: transparent !important;
+}
+
+.management-bar-light input,
+.management-bar-light .form-control,
+.management-bar-light .search-bar {
+  background: var(--st-card) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  color: var(--st-text) !important;
+  border-radius: 6px !important;
+}
+
+.management-bar-light input::placeholder {
+  color: var(--st-muted) !important;
+}
+
+
+/* ════════════════════════════════════════════════
+   8. YUI3 + SENNA (tema base do Liferay DXP)
+   ════════════════════════════════════════════════ */
+
+.yui3-skin-sam .portlet-content,
+.yui3-skin-sam .portlet-body,
+.yui3-skin-sam .portlet-borderless-container,
+.yui3-skin-sam .portlet-boundary,
+.yui3-skin-sam .lfr-portlet-wrapper {
+  background: transparent !important;
+}
+
+#senna_surface1,
+[id^="senna_surface"] {
+  background: var(--st-bg) !important;
+}
+
+#senna_surface1 .portlet-column,
+#senna_surface1 .portlet-column-content,
+#senna_surface1 .portlet-layout,
+#senna_surface1 > div {
+  background: transparent !important;
+}
+
+
+/* ════════════════════════════════════════════════
+   9. FORMULÁRIOS NATIVOS (edição de objeto)
+   ════════════════════════════════════════════════ */
+
+.sheet,
+.portlet-object-web .sheet {
+  background: var(--st-card) !important;
+  border: 1px solid var(--st-border) !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+}
+
+.sheet-header,
+.portlet-object-web .sheet-header {
+  background: var(--st-header) !important;
+  border-bottom: 1px solid var(--st-border) !important;
+  border-radius: 12px 12px 0 0 !important;
+  padding: 16px 24px !important;
+}
+
+.sheet-header h2,
+.sheet-title {
+  color: var(--st-text-pri) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  font-family: var(--st-font) !important;
+}
+
+.sheet-section {
+  background: transparent !important;
+  padding: 20px 24px !important;
+}
+
+.portlet-object-web label,
+.portlet-object-web .control-label,
+.sheet label,
+.sheet .control-label {
+  color: var(--st-muted) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  font-family: var(--st-font) !important;
+  margin-bottom: 5px !important;
+}
+
+.portlet-object-web .form-control,
+.sheet .form-control,
+.portlet-object-web input[type="text"],
+.portlet-object-web input[type="number"],
+.portlet-object-web select,
+.portlet-object-web textarea {
+  background: var(--st-bg) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 6px !important;
+  color: var(--st-text) !important;
+  font-family: var(--st-font) !important;
+  font-size: 13px !important;
+  transition: border-color 0.2s !important;
+}
+
+.portlet-object-web .form-control:focus,
+.sheet .form-control:focus {
+  border-color: var(--st-accent) !important;
+  box-shadow: 0 0 0 2px rgba(91,163,245,0.12) !important;
+  outline: none !important;
+}
+
+.portlet-object-web .form-control::placeholder {
+  color: var(--st-muted) !important;
+}
+
+.portlet-object-web .btn-primary,
+.sheet .btn-primary {
+  background: var(--st-accent) !important;
+  border-color: var(--st-accent) !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  font-family: var(--st-font) !important;
+}
+
+.portlet-object-web .btn-secondary,
+.sheet .btn-secondary {
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  color: var(--st-text) !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  font-family: var(--st-font) !important;
+}
+
+
+/* ════════════════════════════════════════════════
+   10. BADGES (APPROVED, DRAFT etc.)
+   ════════════════════════════════════════════════ */
+
+.label-success,
+.badge.label-success,
+span.label-success {
+  background: rgba(125,211,168,0.15) !important;
+  border: 1px solid rgba(125,211,168,0.3) !important;
+  color: var(--st-success) !important;
+  border-radius: 4px !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  padding: 3px 8px !important;
+}
+
+.label-warning,
+.badge.label-warning {
+  background: rgba(245,180,97,0.15) !important;
+  border: 1px solid rgba(245,180,97,0.3) !important;
+  color: var(--st-warning) !important;
+  border-radius: 4px !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  padding: 3px 8px !important;
+}
+
+.label-danger,
+.badge.label-danger {
+  background: rgba(244,113,116,0.15) !important;
+  border: 1px solid rgba(244,113,116,0.3) !important;
+  color: var(--st-danger) !important;
+  border-radius: 4px !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  padding: 3px 8px !important;
+}
+
+.label-info,
+.badge.label-info {
+  background: rgba(91,163,245,0.15) !important;
+  border: 1px solid rgba(91,163,245,0.3) !important;
+  color: var(--st-accent) !important;
+  border-radius: 4px !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  padding: 3px 8px !important;
+}
+
+
+/* ════════════════════════════════════════════════
+   11. DROPDOWNS E MODAIS
+   ════════════════════════════════════════════════ */
+
+.dropdown-menu {
+  background: var(--st-card) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
+  padding: 4px !important;
+}
+
+.dropdown-item {
+  color: var(--st-text) !important;
+  font-size: 13px !important;
+  font-family: var(--st-font) !important;
+  border-radius: 5px !important;
+  padding: 8px 12px !important;
+  transition: background 0.12s;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background: rgba(91,163,245,0.1) !important;
+  color: var(--st-accent) !important;
+}
+
+.btn-unstyled,
+.dropdown-toggle.btn-unstyled {
+  color: var(--st-muted) !important;
+  transition: color 0.2s;
+}
+
+.btn-unstyled:hover {
+  color: var(--st-accent) !important;
+}
+
+.modal-content {
+  background: var(--st-card) !important;
+  border: 1px solid var(--st-border) !important;
+  border-radius: 12px !important;
+  color: var(--st-text) !important;
+}
+
+.modal-header {
+  background: var(--st-header) !important;
+  border-bottom: 1px solid var(--st-border) !important;
+}
+
+.modal-title {
+  color: var(--st-text-pri) !important;
+  font-weight: 700 !important;
+  font-family: var(--st-font) !important;
+}
+
+.modal-body {
+  color: var(--st-text) !important;
+}
+
+.modal-footer {
+  background: var(--st-header) !important;
+  border-top: 1px solid var(--st-border) !important;
+}
+
+
+/* ════════════════════════════════════════════════
+   12. ALERTAS
+   ════════════════════════════════════════════════ */
+
+.alert-success {
+  background: rgba(125,211,168,0.1) !important;
+  border: 1px solid rgba(125,211,168,0.3) !important;
+  color: var(--st-success) !important;
+  border-radius: 8px !important;
+}
+
+.alert-warning {
+  background: rgba(245,180,97,0.1) !important;
+  border: 1px solid rgba(245,180,97,0.3) !important;
+  color: var(--st-warning) !important;
+  border-radius: 8px !important;
+}
+
+.alert-danger {
+  background: rgba(244,113,116,0.1) !important;
+  border: 1px solid rgba(244,113,116,0.3) !important;
+  color: var(--st-danger) !important;
+  border-radius: 8px !important;
+}
+
+.alert-info {
+  background: rgba(91,163,245,0.1) !important;
+  border: 1px solid rgba(91,163,245,0.3) !important;
+  color: var(--st-accent) !important;
+  border-radius: 8px !important;
+}
+
+
+/* ════════════════════════════════════════════════
+   13. BREADCRUMB
+   ════════════════════════════════════════════════ */
+
+.breadcrumb {
+  background: transparent !important;
+  padding: 8px 0 !important;
+}
+
+.breadcrumb-item a {
+  color: var(--st-muted) !important;
+  font-size: 13px;
+  text-decoration: none !important;
+}
+
+.breadcrumb-item a:hover {
+  color: var(--st-accent) !important;
+}
+
+.breadcrumb-item.active {
+  color: var(--st-accent) !important;
+  font-size: 13px;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  color: var(--st-muted) !important;
+}
+
+
+/* ════════════════════════════════════════════════
+   14. TOOLTIPS
+   ════════════════════════════════════════════════ */
+
+.tooltip-inner {
+  background: var(--st-header) !important;
+  color: var(--st-text) !important;
+  border: 1px solid var(--st-border) !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  font-family: var(--st-font) !important;
+}
+
+
+/* ════════════════════════════════════════════════
+   15. UTILITÁRIOS DE SELEÇÃO DE TEXTO
+   ════════════════════════════════════════════════ */
+
+::selection {
+  background: rgba(91,163,245,0.3);
+  color: var(--st-text-pri);
+}
