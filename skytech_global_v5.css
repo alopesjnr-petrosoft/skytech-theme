@@ -737,3 +737,107 @@ span.label-success {
   background: rgba(91,163,245,0.3);
   color: var(--st-text-pri);
 }
+/* ════════════════════════════════════════════════
+   AJUSTES PONTUAIS DA PÁGINA
+   ════════════════════════════════════════════════ */
+
+/* ── 1. Integrar bloco do logo ao header ── */
+/* Remove o fundo escuro destacado do portlet do logo, fundindo-o com o header */
+
+#portlet_com_liferay_site_logo_web_portlet_SiteLogoPortlet_,
+[id*="SiteLogoPortlet"],
+.portlet-boundary[class*="SiteLogoPortlet"],
+.portlet-boundary[class*="site_logo_web"],
+[class*="SiteLogoPortlet"] {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+/* Reduzir altura geral do container do logo */
+header#banner .navbar.navbar-classic.navbar-top {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  background: transparent !important;
+}
+
+/* Manter o site-name visível mas sem se sobressair */
+.site-name,
+.site-name a {
+  color: var(--st-text-pri) !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+
+
+/* ── 2. Aba ativa destacada no menu de navegação ── */
+
+.navigation-bar .nav-link.active,
+.navigation-bar .nav-item.active > a,
+.navigation-bar .nav-item.selected > a,
+.navigation-bar .nav-link[aria-current="page"],
+.navigation-bar li.active > a,
+.navigation-bar li.current > a,
+nav.navbar-light .nav-link.active,
+nav.navbar-light .nav-item.active > a {
+  color: var(--st-accent) !important;
+  font-weight: 700 !important;
+  background: rgba(91,163,245,0.08) !important;
+  border-bottom: 2px solid var(--st-accent) !important;
+  border-radius: 4px 4px 0 0 !important;
+}
+
+/* Hover ligeiramente destacado nos outros links */
+.navigation-bar .nav-link:not(.active):hover,
+nav.navbar-light .nav-link:not(.active):hover {
+  color: var(--st-text-pri) !important;
+  background: rgba(255,255,255,0.03) !important;
+  border-radius: 4px !important;
+}
+
+
+/* ── 3. Avatar / ícone do usuário no tema escuro ── */
+
+.user-personal-bar,
+.user-personal-bar .nav-item,
+.nav-account-management,
+.user-icon-color-0,
+.user-icon-color-1,
+.user-icon-color-2,
+.user-icon-color-3,
+.user-icon-color-4,
+.user-icon-color-5,
+.user-icon-color-6,
+.user-icon-color-7,
+.user-icon-color-8,
+.user-icon-color-9,
+.user-icon,
+[class*="user-icon-color"] {
+  background: rgba(91,163,245,0.15) !important;
+  border: 1px solid rgba(91,163,245,0.35) !important;
+  color: var(--st-accent) !important;
+}
+
+.user-icon span,
+.user-icon-color span,
+[class*="user-icon-color"] span,
+.user-icon-color-light {
+  color: var(--st-accent) !important;
+  font-weight: 700 !important;
+}
+
+/* Avatar/imagem dentro do botão */
+.user-personal-bar img,
+.user-icon img {
+  border-radius: 50% !important;
+}
+
+/* Botão do dropdown do usuário */
+.user-personal-bar .dropdown-toggle,
+.user-personal-bar button {
+  background: transparent !important;
+  border: none !important;
+}
