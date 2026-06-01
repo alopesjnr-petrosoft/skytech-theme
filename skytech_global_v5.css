@@ -841,3 +841,283 @@ nav.navbar-light .nav-link:not(.active):hover {
   background: transparent !important;
   border: none !important;
 }
+/* ════════════════════════════════════════════════
+   FIX GLOBAL — LABELS E INPUTS EM PAINÉIS ADMIN
+   ════════════════════════════════════════════════ */
+
+/* ── 1. Labels, títulos de seção, textos de configuração ── */
+
+/* Forçar todos os labels e textos auxiliares para cores legíveis */
+label,
+.control-label,
+.form-label,
+legend,
+fieldset > legend,
+.text-secondary,
+.text-muted,
+.form-text,
+.form-feedback-item,
+.section-label,
+.label-section,
+.sheet-text,
+.sheet-tertiary-title,
+.sheet-subtitle,
+h3.sheet-tertiary-title,
+.panel-title,
+.panel-header h3,
+.panel-header h4,
+.card-title,
+.lfr-config-section,
+.config-section-title,
+[class*="config-title"],
+[class*="config-label"] {
+  color: var(--st-text) !important;
+}
+
+/* Labels em uppercase (caps) — comum em painéis de config */
+.sheet-tertiary-title,
+.control-label-text,
+.form-section-title,
+h4.sheet-tertiary-title,
+.form-group-autofit > .form-group > label,
+.lfr-form-content label {
+  color: var(--st-muted) !important;
+  font-weight: 700 !important;
+}
+
+/* Títulos maiores e fundamentais */
+.modal-title,
+.sheet-title,
+.sheet-text-title,
+.page-header h1,
+.page-header h2,
+.lfr-portal-title,
+h1, h2, h3, h4, h5, h6 {
+  color: var(--st-text-pri) !important;
+}
+
+/* Texto em descrições ou hints */
+.form-hint,
+.form-text-hint,
+.help-block,
+.text-help,
+.config-description,
+[class*="description"] {
+  color: var(--st-muted) !important;
+}
+
+
+/* ── 2. Inputs, selects e textareas em todo o admin ── */
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="search"],
+input[type="url"],
+input[type="password"],
+input[type="tel"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="time"],
+select,
+textarea,
+.form-control,
+.form-control-sm,
+.form-control-lg,
+.input-group input,
+.input-group select,
+.input-group-text,
+.dropdown-menu input,
+.modal input,
+.modal select,
+.modal textarea,
+.sheet input,
+.sheet select,
+.sheet textarea,
+.panel input,
+.panel select,
+.panel textarea {
+  background: var(--st-bg) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  color: var(--st-text) !important;
+  font-family: var(--st-font) !important;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="search"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+input[type="datetime-local"]:focus,
+input[type="time"]:focus,
+select:focus,
+textarea:focus,
+.form-control:focus {
+  background: var(--st-bg) !important;
+  border-color: var(--st-accent) !important;
+  color: var(--st-text-pri) !important;
+  box-shadow: 0 0 0 2px rgba(91,163,245,0.12) !important;
+  outline: none !important;
+}
+
+input::placeholder,
+textarea::placeholder,
+.form-control::placeholder {
+  color: var(--st-muted) !important;
+  opacity: 1 !important;
+}
+
+/* Disabled */
+input:disabled,
+select:disabled,
+textarea:disabled,
+.form-control:disabled {
+  background: rgba(255,255,255,0.02) !important;
+  color: var(--st-dim) !important;
+  border-color: rgba(255,255,255,0.05) !important;
+}
+
+/* Input groups (com prefixos/sufixos) */
+.input-group-prepend,
+.input-group-append,
+.input-group-text {
+  background: var(--st-header) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: var(--st-muted) !important;
+}
+
+
+/* ── 3. Radios e checkboxes ── */
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--st-accent);
+}
+
+.custom-control-label,
+.form-check-label,
+.radio label,
+.checkbox label {
+  color: var(--st-text) !important;
+}
+
+/* Estilizando o "círculo" de seleção dos rádios do Liferay */
+.custom-radio .custom-control-input:checked ~ .custom-control-label::before,
+.form-check-input:checked {
+  background: var(--st-accent) !important;
+  border-color: var(--st-accent) !important;
+}
+
+
+/* ── 4. Cards de "Pré-visualizar" e outros painéis claros ── */
+
+/* Pré-visualizar e blocos com fundo claro do Liferay */
+.panel,
+.panel-default,
+.card,
+.well,
+.preview,
+.preview-container,
+[class*="preview"]:not([class*="-img"]):not([class*="-photo"]) {
+  background: var(--st-card) !important;
+  border-color: var(--st-border) !important;
+  color: var(--st-text) !important;
+}
+
+.panel-heading,
+.card-header,
+.card-title {
+  background: var(--st-header) !important;
+  border-color: var(--st-border) !important;
+  color: var(--st-text-pri) !important;
+}
+
+.panel-body,
+.card-body {
+  background: var(--st-card) !important;
+  color: var(--st-text) !important;
+}
+
+/* Links dentro dos painéis */
+.panel a,
+.card a {
+  color: var(--st-accent) !important;
+}
+
+
+/* ── 5. Tabs de configuração (Configuração / Compartilhamento) ── */
+
+.nav-tabs,
+.nav-tabs-default {
+  border-bottom-color: var(--st-border) !important;
+}
+
+.nav-tabs .nav-link,
+.nav-tabs .nav-item > a {
+  color: var(--st-muted) !important;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 2px solid transparent !important;
+  font-weight: 600 !important;
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-item > a:hover {
+  color: var(--st-text) !important;
+  background: transparent !important;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.active > a {
+  color: var(--st-accent) !important;
+  background: transparent !important;
+  border-bottom: 2px solid var(--st-accent) !important;
+  font-weight: 700 !important;
+}
+
+
+/* ── 6. Botões de painel claros (Selecionar, Procurar, etc.) ── */
+
+button:not(.btn-primary):not(.btn-secondary):not(.btn-danger):not(.btn-success):not(.btn-warning):not(.btn-link):not(.btn-unstyled):not([class*="cc-btn"]):not([class*="dc-"]):not([class*="ta-"]):not([class*="pht-"]):not([class*="mt-"]):not([class*="at-"]):not([class*="phi-"]):not(.dropdown-toggle):not([class*="page-link"]),
+.btn-default,
+.btn-outline-secondary,
+.btn-secondary,
+.btn-light {
+  background: var(--st-card) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  color: var(--st-text) !important;
+}
+
+button:not(.btn-primary):not(.btn-secondary):not(.btn-danger):not(.btn-success):not(.btn-warning):not(.btn-link):not(.btn-unstyled):not([class*="cc-btn"]):not([class*="dc-"]):not([class*="ta-"]):not([class*="pht-"]):not([class*="mt-"]):not([class*="at-"]):not([class*="phi-"]):not(.dropdown-toggle):not([class*="page-link"]):hover,
+.btn-default:hover,
+.btn-outline-secondary:hover,
+.btn-light:hover {
+  background: var(--st-header) !important;
+  border-color: rgba(91,163,245,0.3) !important;
+  color: var(--st-text-pri) !important;
+}
+
+
+/* ── 7. Setas dos select (chevron) ── */
+
+select:not([multiple]) {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1L6 6L11 1' stroke='%236B7388' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  padding-right: 32px !important;
+}
+
+
+/* ── 8. Tag DESCONTINUADO / labels coloridos extras ── */
+
+.label-warning-dark,
+.text-warning,
+[class*="DESCONTINUADO"],
+.deprecated-label {
+  color: var(--st-warning) !important;
+}
