@@ -214,9 +214,20 @@ a.logo img,
   box-shadow: none !important;
 }
 
-.navigation-bar .navbar-collapse,
+/* Navbar do MENU de navegação (fora do header#banner):
+   markup real = div.navbar.navbar-classic.navbar-expand-md.navbar-light.pb-3
+   Era o "retângulo" mais escuro. Torna transparente para fundir à página.
+   Importante: NÃO afeta a .navbar-top (header do logo), que mantém fundo. */
+.navbar.navbar-classic.navbar-expand-md.navbar-light,
+.navbar.navbar-classic.navbar-light.pb-3,
+.navbar.navbar-classic.navbar-light:not(.navbar-top),
+.navbar.navbar-classic.navbar-light:not(.navbar-top) .container-fluid,
+.navbar.navbar-classic.navbar-light:not(.navbar-top) .container-fluid-max-xl,
+.navbar.navbar-classic.navbar-light:not(.navbar-top) .navbar-collapse,
 .navbar-collapse#navigationCollapse {
   background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .navigation-bar .nav-link,
