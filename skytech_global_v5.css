@@ -1,14 +1,14 @@
 /* ═══════════════════════════════════════════════════════════════
-   SkyTech — CSS GLOBAL v8  (tema ESCURO, azul-noturno)
-   Reescrito do zero. Substitui qualquer CSS anterior.
-   Cole em: Site Administration → Design → Pages → Options → CSS
+   SkyTech — CSS GLOBAL v9  (tema ESCURO, azul-noturno)
+   Reescrito do zero. Substitui TODO o CSS anterior (não anexar nada).
+   CE "skytech tema" → URL de CSS aponta para este arquivo.
 
-   PRINCÍPIOS
-   ──────────
-   • Paleta azul-escura coesa; segmentação por linhas finas, não por blocos.
-   • Texto sempre legível (contraste verificado sobre cada superfície).
-   • Sombras discretas; sem gradientes agressivos.
-   • Controles de edição do admin organizados e discretos (não ocultos).
+   Correções baseadas no markup real do tema Petrosoft:
+   • Nome do site usava .text-dark  → tornado legível
+   • Dropdown com ícone (atributo [icon]) absoluto sobre o texto → realinhado
+   • "Menu Exibir" = span.portlet-name-text no portlet-topper → tratado
+   • Faixa/realce do portlet de navegação → neutralizado
+   • Tabela .table-list.table-striped ficava azul-clara → fundo escuro legível
 
    PALETA
    --st-bg        #0B111F  fundo de página
@@ -19,13 +19,11 @@
    --st-border-2  rgba(255,255,255,0.12)  bordas de inputs
    --st-accent    #5BA3F5  azul primário
    --st-accent-d  #4A90E2  azul hover/pressed
-   --st-success   #7DD3A8  verde
-   --st-warning   #F5B461  laranja
-   --st-danger    #F47174  vermelho
-   --st-text-pri  #E8ECF4  texto primário (14:1)
-   --st-text      #C3CCDB  texto padrão (9:1)
-   --st-muted     #8B95A8  auxiliar/labels (4.7:1 → AA)
-   --st-dim       #5B6577  disabled/placeholder (decorativo)
+   --st-success   #7DD3A8 · --st-warning #F5B461 · --st-danger #F47174
+   --st-text-pri  #E8ECF4  texto primário
+   --st-text      #C3CCDB  texto padrão
+   --st-muted     #8B95A8  auxiliar/labels (AA)
+   --st-dim       #5B6577  disabled/placeholder
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
@@ -86,6 +84,7 @@ html, body {
 .portlet-boundary,
 .portlet-content,
 .portlet-content-container,
+.portlet-content-editable,
 .portlet-body,
 .portlet-borderless-container,
 .portlet-layout .portlet-column-content,
@@ -99,8 +98,7 @@ html, body {
 /* Superfícies claras residuais do tema base não devem vazar */
 .bg-white,
 .bg-light,
-.bg-body,
-.sheet-lg.bg-white {
+.bg-body {
   background: var(--st-surface) !important;
   color: var(--st-text) !important;
 }
@@ -130,10 +128,6 @@ h1, h2, h3, h4, h5, h6,
   font-family: var(--st-font) !important;
 }
 
-p, span, li, td, div, label {
-  font-family: var(--st-font);
-}
-
 .text-secondary,
 .text-muted,
 .form-text,
@@ -152,9 +146,9 @@ p, span, li, td, div, label {
 
 
 /* ════════════════════════════════════════════════
-   3. HEADER + PORTLET DO LOGO   (corrige Problemas 2 e 4)
-   Faixa azul de seleção neutralizada; nome do site legível;
-   logo fundido ao header por uma linha fina.
+   3. HEADER + LOGO   (FIX nome "SkyTech" ilegível)
+   Markup real: a.logo.custom-logo > h1.font-weight-bold.h2.mb-0.text-dark
+   A classe .text-dark forçava #272833 (contraste 1.29).
    ════════════════════════════════════════════════ */
 
 header,
@@ -175,56 +169,37 @@ header#banner {
   border-bottom: 1px solid var(--st-border) !important;
 }
 
-header#banner .navbar.navbar-classic.navbar-top {
+header#banner .navbar.navbar-classic {
+  background: transparent !important;
   padding-top: 10px !important;
   padding-bottom: 10px !important;
-  background: transparent !important;
 }
 
-/* Portlet do logo: sem caixa destacada, sem realce de foco/seleção */
-#portlet_com_liferay_site_logo_web_portlet_SiteLogoPortlet_,
-[id*="SiteLogoPortlet"],
-[id*="site_logo"],
-.portlet-boundary[class*="SiteLogoPortlet"],
-.portlet-boundary[class*="site_logo_web"],
-[class*="SiteLogoPortlet"],
-.portlet-boundary[class*="SiteLogoPortlet"]:focus,
-.portlet-boundary[class*="SiteLogoPortlet"]:focus-within,
-.portlet-boundary[class*="SiteLogoPortlet"].selected,
-.portlet-boundary[class*="SiteLogoPortlet"].active {
-  background: var(--st-header) !important;
-  border: none !important;
-  border-bottom: 1px solid var(--st-border) !important;
-  box-shadow: none !important;
-  outline: none !important;
-  padding-top: 8px !important;
-  padding-bottom: 8px !important;
-}
-
-[class*="SiteLogoPortlet"] * {
-  background: transparent !important;
-}
-
-/* Nome do site SEMPRE legível (estava escuro sobre escuro) */
-.site-name,
-.site-name a,
-.site-name span,
-.navbar-brand,
-[class*="site-name"],
-[class*="site-name"] a,
-[class*="SiteLogoPortlet"] .site-name,
-[class*="SiteLogoPortlet"] a,
-[class*="SiteLogoPortlet"] span {
+/* Logo + nome do site SEMPRE legível (vence .text-dark) */
+a.logo,
+a.logo.custom-logo,
+a.logo.custom-logo *,
+.logo.custom-logo .text-dark,
+.custom-logo h1,
+.custom-logo .h2,
+.logo-md h1,
+.logo-xs h1,
+header#banner .text-dark,
+.navbar-classic .text-dark {
   color: var(--st-text-pri) !important;
-  opacity: 1 !important;
+}
+
+a.logo h1,
+a.logo .h2 {
   font-size: 18px !important;
   font-weight: 700 !important;
+  margin-bottom: 0 !important;
 }
 
-[class*="SiteLogoPortlet"] img,
-.site-logo img,
-.navbar-brand img {
+a.logo img,
+.custom-logo img {
   vertical-align: middle !important;
+  margin-right: 10px !important;
 }
 
 
@@ -239,8 +214,9 @@ header#banner .navbar.navbar-classic.navbar-top {
   box-shadow: none !important;
 }
 
-.navigation-bar .navbar-collapse {
-  background: var(--st-header) !important;
+.navigation-bar .navbar-collapse,
+.navbar-collapse#navigationCollapse {
+  background: transparent !important;
 }
 
 .navigation-bar .nav-link,
@@ -277,7 +253,62 @@ nav.navbar-light .nav-item.active > a {
 
 
 /* ════════════════════════════════════════════════
-   5. CONTROL-MENU (barra superior do admin)   (Problema 3)
+   5. PORTLET DE NAVEGAÇÃO — "Menu Exibir" / topper / faixa
+   Markup real:
+     section.portlet > header.cadmin.portlet-topper
+       > .portlet-title-default > span.portlet-name-text ("Menu Exibir")
+   Em VISUALIZAÇÃO, oculta o topper de edição que vazava p/ a página
+   e remove o fundo/realce destoante do portlet.
+   ════════════════════════════════════════════════ */
+
+/* Wrapper e conteúdo do portlet de navegação: sem fundo/realce */
+.portlet-boundary[class*="SiteNavigationMenuPortlet"],
+.portlet-boundary[class*="SiteNavigationMenuPortlet"] .portlet,
+section.portlet[id*="SiteNavigationMenuPortlet"],
+.portlet-navigation,
+.portlet-navigation .portlet,
+.portlet-navigation .portlet-content,
+.portlet-navigation .portlet-content-editable {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Realce de hover/foco que pintava a "faixa" → neutralizado */
+.portlet:hover,
+.portlet.portlet-active,
+section.portlet:focus,
+section.portlet:focus-within {
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Título "Menu Exibir" discreto (caso visível em edição) */
+.portlet-topper .portlet-title-default,
+.portlet-topper .portlet-name-text,
+header.portlet-topper .portlet-name-text {
+  color: var(--st-dim) !important;
+  background: transparent !important;
+}
+
+.portlet-topper,
+header.cadmin.portlet-topper {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Em modo VISUALIZAÇÃO (sem menu de edição no body), oculta o topper
+   do portlet de navegação (lápis / ⋮ / "Menu Exibir") que vazava.
+   No modo edição o Liferay altera o body e os controles voltam. */
+body:not(.has-edit-mode-menu):not(.has-control-menu-active) .portlet-navigation .portlet-topper,
+body:not(.has-edit-mode-menu):not(.has-control-menu-active) [class*="SiteNavigationMenuPortlet"] .portlet-topper {
+  display: none !important;
+}
+
+
+/* ════════════════════════════════════════════════
+   6. CONTROL-MENU (barra superior do admin)
    Alinha ícones e rótulos; evita sobreposição.
    ════════════════════════════════════════════════ */
 
@@ -287,10 +318,7 @@ nav.navbar-light .nav-item.active > a {
   border-bottom: 1px solid var(--st-border) !important;
 }
 
-.control-menu-nav,
-.control-menu .control-menu-nav {
-  align-items: center !important;
-}
+.control-menu-nav { align-items: center !important; }
 
 .control-menu-nav-item {
   display: inline-flex !important;
@@ -321,51 +349,7 @@ nav.navbar-light .nav-item.active > a {
 
 
 /* ════════════════════════════════════════════════
-   6. CONTROLES DE EDIÇÃO DE PORTLET   (Problema 1)
-   "Menu Exibir", lápis e ⋮ do admin: visíveis, discretos,
-   sem caixa destacada ao redor do portlet de navegação.
-   ════════════════════════════════════════════════ */
-
-.portlet-boundary[class*="site_navigation"],
-.portlet-boundary[class*="SiteNavigationMenu"],
-[class*="site_navigation_menu"],
-.portlet-navigation-menu,
-.portlet-boundary[class*="navigation"] {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-.portlet-topper,
-.portlet-topper-toolbar {
-  background: transparent !important;
-  border: none !important;
-}
-
-.portlet-title-text,
-.portlet-topper .portlet-title-text {
-  color: var(--st-dim) !important;
-  font-size: 12px !important;
-  font-weight: 600 !important;
-}
-
-.portlet-topper-toolbar a,
-.portlet-topper-toolbar button,
-.portlet-topper-toolbar .portlet-icon-back {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  color: var(--st-muted) !important;
-}
-
-.portlet-topper-toolbar a:hover,
-.portlet-topper-toolbar button:hover {
-  color: var(--st-accent) !important;
-}
-
-
-/* ════════════════════════════════════════════════
-   7. AVATAR / BARRA DO USUÁRIO   (Problema 3)
+   7. AVATAR / BARRA DO USUÁRIO
    ════════════════════════════════════════════════ */
 
 .user-personal-bar,
@@ -390,13 +374,11 @@ nav.navbar-light .nav-item.active > a {
   border: 1px solid rgba(91,163,245,0.35) !important;
   color: var(--st-accent) !important;
 }
-
 .user-icon span,
 [class*="user-icon-color"] span {
   color: var(--st-accent) !important;
   font-weight: 700 !important;
 }
-
 .user-personal-bar img,
 .user-icon img {
   border-radius: 50% !important;
@@ -413,12 +395,10 @@ footer, .site-footer, #footer {
   border-top: 1px solid var(--st-border) !important;
   color: var(--st-muted) !important;
 }
-
 footer a, .site-footer a {
   color: var(--st-text) !important;
   transition: color 0.2s;
 }
-
 footer a:hover, .site-footer a:hover {
   color: var(--st-accent) !important;
 }
@@ -438,9 +418,7 @@ footer a:hover, .site-footer a:hover {
   background: rgba(91,163,245,0.30);
   border-radius: 4px;
 }
-*::-webkit-scrollbar-thumb:hover {
-  background: rgba(91,163,245,0.55);
-}
+*::-webkit-scrollbar-thumb:hover { background: rgba(91,163,245,0.55); }
 
 
 /* ════════════════════════════════════════════════
@@ -449,47 +427,44 @@ footer a:hover, .site-footer a:hover {
 
 .fds,
 .data-set-wrapper,
+.data-set,
 .data-set-fluid,
-.data-set-content {
+.data-set-content,
+.data-set-content-wrapper {
+  background: var(--st-surface) !important;
   color: var(--st-text) !important;
 }
 
 .data-set-wrapper {
-  background: var(--st-surface) !important;
   border: 1px solid var(--st-border) !important;
   border-radius: var(--st-radius) !important;
   overflow: hidden !important;
   box-shadow: var(--st-shadow) !important;
 }
 
-.container-fluid.container-xl.mt-3 {
+.container-fluid.container-xl.mt-3,
+.container-fluid.mt-3 {
   background: transparent !important;
   padding: 0 !important;
 }
 
-.dnd-table,
-.dnd-table.fixed,
-div.dnd-table {
+.dnd-table, .dnd-table.fixed, div.dnd-table {
   background: transparent !important;
   width: 100% !important;
 }
 
-.dnd-thead,
-div.dnd-thead,
-.dnd-thead .dnd-tr {
+.dnd-thead, div.dnd-thead, .dnd-thead .dnd-tr {
   background: var(--st-surface-2) !important;
 }
 
-.dnd-tr,
-div.dnd-tr {
+.dnd-tr, div.dnd-tr {
   background: transparent !important;
   border-bottom: 1px solid var(--st-border) !important;
   display: flex !important;
   align-items: center !important;
 }
 
-.dnd-th,
-div.dnd-th,
+.dnd-th, div.dnd-th,
 .dnd-th.content-renderer-actionLink,
 .dnd-th.content-renderer-link,
 .dnd-th.item-actions {
@@ -503,71 +478,52 @@ div.dnd-th,
   border-bottom: 1px solid var(--st-border) !important;
 }
 
-.dnd-th .btn-unstyled,
-.dnd-th button {
-  color: var(--st-muted) !important;
-  font-size: 11px !important;
-  font-weight: 700 !important;
-}
-
-.dnd-tbody,
-div.dnd-tbody {
-  background: var(--st-surface) !important;
-}
+.dnd-tbody, div.dnd-tbody { background: var(--st-surface) !important; }
 
 .dnd-tbody .dnd-tr {
   background: var(--st-surface) !important;
   border-bottom: 1px solid var(--st-border) !important;
   transition: background 0.12s !important;
 }
+.dnd-tbody .dnd-tr:nth-child(even) { background: rgba(255,255,255,0.02) !important; }
+.dnd-tbody .dnd-tr:hover { background: var(--st-accent-bg) !important; }
 
-.dnd-tbody .dnd-tr:nth-child(even) {
-  background: rgba(255,255,255,0.02) !important;
-}
-
-.dnd-tbody .dnd-tr:hover {
-  background: var(--st-accent-bg) !important;
-}
-
-.dnd-td,
-div.dnd-td,
-.dnd-tbody .dnd-th {
+.dnd-td, div.dnd-td, .dnd-tbody .dnd-th {
   background: transparent !important;
   color: var(--st-text) !important;
   padding: 10px 16px !important;
   font-size: 13px !important;
   border: none !important;
 }
-
-.dnd-td a,
-.dnd-tbody a {
-  color: var(--st-accent) !important;
-}
-.dnd-td a:hover,
-.dnd-tbody a:hover {
-  text-decoration: underline !important;
-}
+.dnd-td a, .dnd-tbody a { color: var(--st-accent) !important; }
+.dnd-td a:hover, .dnd-tbody a:hover { text-decoration: underline !important; }
 
 
 /* ════════════════════════════════════════════════
-   11. TABELAS BOOTSTRAP (.table)   (corrige Problema 5)
-   As listas de Modelos/Motores usam .table e ficavam brancas.
+   11. TABELAS .table / .table-list   (FIX azul-clara ilegível)
+   Markup real:
+     table.table.table-list.table-striped.table-hover
+       .table-head-bordered.table-valign-middle.table-sort
+     células: td.cell-id, .cell-fabricante, .table-list-title, etc.
    ════════════════════════════════════════════════ */
 
 .table,
 table.table,
-.fds .table,
+.table-list,
+table.table.table-list,
 .data-set-content .table,
-.table-responsive .table {
+.table-responsive .table,
+.table-responsive .table-list {
   background: var(--st-surface) !important;
   color: var(--st-text) !important;
   border-color: var(--st-border) !important;
   margin-bottom: 0 !important;
 }
 
+/* Cabeçalho */
 .table thead th,
-table.table thead th,
-.fds .table thead th {
+.table-list thead th,
+.table-list.table-head-bordered thead th {
   background: var(--st-surface-2) !important;
   color: var(--st-muted) !important;
   border-color: var(--st-border) !important;
@@ -578,43 +534,74 @@ table.table thead th,
   vertical-align: middle !important;
 }
 
+/* Corpo: TODAS as células com fundo escuro e texto legível */
+.table tbody tr,
 .table tbody td,
 .table tbody th,
-table.table tbody td,
-.fds .table tbody td {
+.table-list tbody tr,
+.table-list tbody td,
+.table-list tbody th,
+.table-list .table-list-title,
+.table-list .cell-id,
+.table-list [class*="cell-"] {
   background: var(--st-surface) !important;
   color: var(--st-text) !important;
   border-color: var(--st-border) !important;
   vertical-align: middle !important;
 }
 
-.table tbody tr:nth-of-type(even) td,
-.table-striped tbody tr:nth-of-type(odd) td {
+/* Zebra (table-striped) — sem virar azul-claro */
+.table-striped tbody tr:nth-of-type(odd) td,
+.table-striped tbody tr:nth-of-type(odd) th,
+.table-list.table-striped tbody tr:nth-of-type(odd) td,
+.table-list.table-striped tbody tr:nth-of-type(odd) th,
+.table tbody tr:nth-of-type(even) td {
   background: rgba(255,255,255,0.02) !important;
 }
 
-.table tbody tr:hover td,
-.table-hover tbody tr:hover td {
+/* Hover (table-hover) sutil, mantendo texto claro */
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th,
+.table-list.table-hover tbody tr:hover td,
+.table-list.table-hover tbody tr:hover th,
+.table-list.table-hover tbody tr:hover .table-list-title,
+.table-list.table-hover tbody tr:hover [class*="cell-"] {
   background: var(--st-accent-bg) !important;
+  color: var(--st-text-pri) !important;
 }
 
-/* Imagens / “Foto do Modelo”: nunca com fundo branco */
+/* Linha selecionada/ativa */
+.table tbody tr.active td,
+.table tbody tr.table-active td,
+.table-list tbody tr.active td,
+.table-list tbody tr[aria-selected="true"] td {
+  background: rgba(91,163,245,0.12) !important;
+  color: var(--st-text-pri) !important;
+}
+
+/* Títulos e links de célula */
+.table-list .table-list-title,
+.table-list .table-list-title a,
+.table-list .cell-id,
+.table td a,
+.table-list td a,
+.data-set-content td a {
+  color: var(--st-accent) !important;
+}
+
+/* Imagens em células nunca com fundo branco */
 .table td img,
-.table td .table-cell-content,
+.table-list td img,
+.table-cell-content img,
 .fds img,
 .data-set-content img {
   background: transparent !important;
 }
 
-.table td a,
-.fds td a,
-.data-set-content td a {
-  color: var(--st-accent) !important;
-}
-
 /* Botões de ordenação (⬍) no cabeçalho — sem caixa preta destoante */
 .table thead button,
-.fds thead button,
+.table-list thead button,
+.table-sort thead button,
 .dnd-th button.btn,
 .dnd-th .btn-monospaced {
   background: transparent !important;
@@ -622,9 +609,9 @@ table.table tbody td,
   color: var(--st-muted) !important;
   border-radius: 4px !important;
 }
-
 .table thead button:hover,
-.fds thead button:hover,
+.table-list thead button:hover,
+.table-sort thead button:hover,
 .dnd-th button.btn:hover {
   background: var(--st-accent-bg) !important;
   border-color: rgba(91,163,245,0.30) !important;
@@ -636,39 +623,29 @@ table.table tbody td,
    12. PAGINAÇÃO
    ════════════════════════════════════════════════ */
 
-.data-set-pagination-wrapper,
-div.data-set-pagination-wrapper {
+.data-set-pagination-wrapper, div.data-set-pagination-wrapper {
   background: var(--st-surface) !important;
   border-top: 1px solid var(--st-border) !important;
   padding: 8px 16px !important;
 }
-
-.data-set-pagination-wrapper *,
-.c-pagination-container * {
+.data-set-pagination-wrapper *, .c-pagination-container * {
   color: var(--st-muted) !important;
   font-size: 12px !important;
 }
-
-.data-set-pagination-wrapper .page-link,
-.c-pagination-container .page-link {
+.data-set-pagination-wrapper .page-link, .c-pagination-container .page-link {
   background: var(--st-surface) !important;
   border-color: var(--st-border) !important;
   color: var(--st-text) !important;
 }
-.data-set-pagination-wrapper .page-link:hover,
-.c-pagination-container .page-link:hover {
+.data-set-pagination-wrapper .page-link:hover, .c-pagination-container .page-link:hover {
   background: var(--st-surface-2) !important;
 }
-
-.data-set-pagination-wrapper .active .page-link,
-.c-pagination-container .active .page-link {
+.data-set-pagination-wrapper .active .page-link, .c-pagination-container .active .page-link {
   background: var(--st-accent) !important;
   border-color: var(--st-accent) !important;
   color: #fff !important;
 }
-
-.data-set-pagination-wrapper select,
-.items-per-page select {
+.data-set-pagination-wrapper select, .items-per-page select {
   background: var(--st-surface) !important;
   border-color: var(--st-border-2) !important;
   color: var(--st-text) !important;
@@ -682,16 +659,14 @@ div.data-set-pagination-wrapper {
 
 .management-bar-light,
 .management-bar.management-bar-light,
-nav.management-bar-light {
+nav.management-bar-light,
+.management-bar-wrapper {
   background: var(--st-header) !important;
   border-bottom: 1px solid var(--st-border) !important;
 }
-
 .management-bar-light .navbar-form,
 .management-bar-light .nav-item,
-.management-bar-light .nav {
-  background: transparent !important;
-}
+.management-bar-light .nav { background: transparent !important; }
 
 .management-bar-light input,
 .management-bar-light .form-control,
@@ -701,9 +676,7 @@ nav.management-bar-light {
   color: var(--st-text) !important;
   border-radius: var(--st-radius-sm) !important;
 }
-.management-bar-light input::placeholder {
-  color: var(--st-dim) !important;
-}
+.management-bar-light input::placeholder { color: var(--st-dim) !important; }
 
 
 /* ════════════════════════════════════════════════
@@ -719,49 +692,36 @@ nav.management-bar-light {
 }
 
 #senna_surface1,
-[id^="senna_surface"] {
-  background: var(--st-bg) !important;
-}
+[id^="senna_surface"] { background: var(--st-bg) !important; }
 
 #senna_surface1 .portlet-column,
 #senna_surface1 .portlet-column-content,
 #senna_surface1 .portlet-layout,
-#senna_surface1 > div {
-  background: transparent !important;
-}
+#senna_surface1 > div { background: transparent !important; }
 
 
 /* ════════════════════════════════════════════════
    15. FORMULÁRIOS / SHEETS (edição de objeto)
    ════════════════════════════════════════════════ */
 
-.sheet,
-.portlet-object-web .sheet {
+.sheet, .portlet-object-web .sheet {
   background: var(--st-surface) !important;
   border: 1px solid var(--st-border) !important;
   border-radius: var(--st-radius) !important;
   box-shadow: var(--st-shadow) !important;
 }
-
-.sheet-header,
-.portlet-object-web .sheet-header {
+.sheet-header, .portlet-object-web .sheet-header {
   background: transparent !important;
   border-bottom: 1px solid var(--st-border) !important;
   border-radius: var(--st-radius) var(--st-radius) 0 0 !important;
   padding: 16px 24px !important;
 }
-
-.sheet-header h2,
-.sheet-title {
+.sheet-header h2, .sheet-title {
   color: var(--st-text-pri) !important;
   font-size: 16px !important;
   font-weight: 700 !important;
 }
-
-.sheet-section {
-  background: transparent !important;
-  padding: 20px 24px !important;
-}
+.sheet-section { background: transparent !important; padding: 20px 24px !important; }
 
 .portlet-object-web label,
 .portlet-object-web .control-label,
@@ -780,32 +740,16 @@ nav.management-bar-light {
    16. CAMPOS DE FORMULÁRIO (global)
    ════════════════════════════════════════════════ */
 
-input[type="text"],
-input[type="number"],
-input[type="email"],
-input[type="search"],
-input[type="url"],
-input[type="password"],
-input[type="tel"],
-input[type="date"],
-input[type="datetime-local"],
+input[type="text"], input[type="number"], input[type="email"],
+input[type="search"], input[type="url"], input[type="password"],
+input[type="tel"], input[type="date"], input[type="datetime-local"],
 input[type="time"],
-select,
-textarea,
-.form-control,
-.form-control-sm,
-.form-control-lg,
-.input-group input,
-.input-group select,
-.modal input,
-.modal select,
-.modal textarea,
-.sheet input,
-.sheet select,
-.sheet textarea,
-.panel input,
-.panel select,
-.panel textarea {
+select, textarea,
+.form-control, .form-control-sm, .form-control-lg,
+.input-group input, .input-group select,
+.modal input, .modal select, .modal textarea,
+.sheet input, .sheet select, .sheet textarea,
+.panel input, .panel select, .panel textarea {
   background: var(--st-bg) !important;
   border: 1px solid var(--st-border-2) !important;
   color: var(--st-text) !important;
@@ -813,10 +757,7 @@ textarea,
   border-radius: var(--st-radius-sm) !important;
 }
 
-input:focus,
-select:focus,
-textarea:focus,
-.form-control:focus {
+input:focus, select:focus, textarea:focus, .form-control:focus {
   background: var(--st-bg) !important;
   border-color: var(--st-accent) !important;
   color: var(--st-text-pri) !important;
@@ -824,31 +765,23 @@ textarea:focus,
   outline: none !important;
 }
 
-input::placeholder,
-textarea::placeholder,
-.form-control::placeholder {
+input::placeholder, textarea::placeholder, .form-control::placeholder {
   color: var(--st-dim) !important;
   opacity: 1 !important;
 }
 
-input:disabled,
-select:disabled,
-textarea:disabled,
-.form-control:disabled {
+input:disabled, select:disabled, textarea:disabled, .form-control:disabled {
   background: rgba(255,255,255,0.02) !important;
   color: var(--st-dim) !important;
   border-color: rgba(255,255,255,0.06) !important;
 }
 
-.input-group-prepend,
-.input-group-append,
-.input-group-text {
+.input-group-prepend, .input-group-append, .input-group-text {
   background: var(--st-header) !important;
   border-color: var(--st-border-2) !important;
   color: var(--st-muted) !important;
 }
 
-/* Chevron do select */
 select:not([multiple]) {
   appearance: none;
   -webkit-appearance: none;
@@ -858,23 +791,15 @@ select:not([multiple]) {
   padding-right: 32px !important;
 }
 
-/* Radios e checkboxes */
-input[type="checkbox"],
-input[type="radio"] {
-  accent-color: var(--st-accent);
-}
+input[type="checkbox"], input[type="radio"] { accent-color: var(--st-accent); }
 
-.custom-control-label,
-.form-check-label,
-.radio label,
-.checkbox label {
+.custom-control-label, .form-check-label, .radio label, .checkbox label {
   color: var(--st-text) !important;
   text-transform: none !important;
   letter-spacing: normal !important;
   font-size: 13px !important;
   font-weight: 400 !important;
 }
-
 .custom-radio .custom-control-input:checked ~ .custom-control-label::before,
 .form-check-input:checked {
   background: var(--st-accent) !important;
@@ -900,7 +825,7 @@ input[type="radio"] {
   border-color: var(--st-accent-d) !important;
 }
 
-button:not(.btn-primary):not(.btn-danger):not(.btn-success):not(.btn-warning):not(.btn-link):not(.btn-unstyled):not([class*="cc-btn"]):not([class*="dc-"]):not([class*="ta-"]):not([class*="pht-"]):not([class*="mt-"]):not([class*="at-"]):not([class*="phi-"]):not(.dropdown-toggle):not([class*="page-link"]),
+button:not(.btn-primary):not(.btn-danger):not(.btn-success):not(.btn-warning):not(.btn-link):not(.btn-unstyled):not(.dropdown-item):not(.dropdown-toggle):not([class*="cc-btn"]):not([class*="dc-"]):not([class*="ta-"]):not([class*="page-link"]):not(.navbar-toggler):not(.close),
 .btn-default,
 .btn-outline-secondary,
 .btn-secondary,
@@ -911,7 +836,7 @@ button:not(.btn-primary):not(.btn-danger):not(.btn-success):not(.btn-warning):no
   border-radius: var(--st-radius-sm) !important;
 }
 
-button:not(.btn-primary):not(.btn-danger):not(.btn-success):not(.btn-warning):not(.btn-link):not(.btn-unstyled):not([class*="cc-btn"]):not([class*="dc-"]):not([class*="ta-"]):not([class*="pht-"]):not([class*="mt-"]):not([class*="at-"]):not([class*="phi-"]):not(.dropdown-toggle):not([class*="page-link"]):hover,
+button:not(.btn-primary):not(.btn-danger):not(.btn-success):not(.btn-warning):not(.btn-link):not(.btn-unstyled):not(.dropdown-item):not(.dropdown-toggle):not([class*="cc-btn"]):not([class*="dc-"]):not([class*="ta-"]):not([class*="page-link"]):not(.navbar-toggler):not(.close):hover,
 .btn-default:hover,
 .btn-outline-secondary:hover,
 .btn-secondary:hover,
@@ -921,24 +846,20 @@ button:not(.btn-primary):not(.btn-danger):not(.btn-success):not(.btn-warning):no
   color: var(--st-text-pri) !important;
 }
 
-.btn-link {
-  color: var(--st-accent) !important;
-}
-
-.btn-unstyled,
-.dropdown-toggle.btn-unstyled {
-  color: var(--st-muted) !important;
-}
-.btn-unstyled:hover {
-  color: var(--st-accent) !important;
-}
+.btn-link { color: var(--st-accent) !important; }
+.btn-unstyled, .dropdown-toggle.btn-unstyled { color: var(--st-muted) !important; }
+.btn-unstyled:hover { color: var(--st-accent) !important; }
 
 
 /* ════════════════════════════════════════════════
-   18. DROPDOWNS   (corrige Problema 3 — ícone sobre texto)
+   18. DROPDOWNS   (FIX ícone [icon] sobreposto ao texto)
+   Markup real: button.dropdown-item com atributo icon="..."
+   dentro de ul.list-unstyled / .dropdown-menu (portlet-options).
    ════════════════════════════════════════════════ */
 
-.dropdown-menu {
+.dropdown-menu,
+.dropdown-menu.portlet-options-dropdown,
+[class*="portlet_options"].dropdown-menu {
   background: var(--st-surface) !important;
   border: 1px solid var(--st-border-2) !important;
   border-radius: var(--st-radius) !important;
@@ -946,8 +867,10 @@ button:not(.btn-primary):not(.btn-danger):not(.btn-success):not(.btn-warning):no
   padding: 4px !important;
 }
 
-.dropdown-item,
-.dropdown-menu li > a {
+.dropdown-menu .dropdown-item,
+.dropdown-menu button.dropdown-item,
+.dropdown-menu li > a.dropdown-item,
+ul.list-unstyled .dropdown-item {
   display: flex !important;
   align-items: center !important;
   gap: 10px !important;
@@ -955,47 +878,51 @@ button:not(.btn-primary):not(.btn-danger):not(.btn-success):not(.btn-warning):no
   color: var(--st-text) !important;
   font-size: 13px !important;
   border-radius: 5px !important;
-  padding: 8px 12px !important;
+  padding: 8px 14px !important;
+  text-align: left !important;
+  white-space: normal !important;
   transition: background 0.12s, color 0.12s;
 }
 
-.dropdown-item .lexicon-icon,
-.dropdown-item svg,
-.dropdown-item img,
-.dropdown-menu li > a .lexicon-icon,
-.dropdown-menu li > a svg {
-  flex: 0 0 auto !important;
-  position: static !important;     /* impede ícone posicionado por cima */
-  margin: 0 !important;
+/* Ícone (lexicon/svg/img, inclusive injetado via [icon]) sai de cima
+   do texto e fica no fluxo, à esquerda */
+.dropdown-menu .dropdown-item .lexicon-icon,
+.dropdown-menu .dropdown-item svg,
+.dropdown-menu .dropdown-item img,
+.dropdown-menu .dropdown-item .inline-item,
+.dropdown-menu button.dropdown-item > svg,
+.dropdown-menu button.dropdown-item > .lexicon-icon {
+  position: static !important;
+  flex: 0 0 16px !important;
   width: 16px !important;
   height: 16px !important;
+  margin: 0 !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
 }
 
-.dropdown-item span,
-.dropdown-item .text,
-.dropdown-menu li > a span {
+.dropdown-menu .dropdown-item span,
+.dropdown-menu .dropdown-item .dropdown-item-text {
   flex: 1 1 auto !important;
-  white-space: normal !important;
+  position: static !important;
+  margin-left: 0 !important;
 }
 
-.dropdown-item:hover,
-.dropdown-item:focus,
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus,
 .dropdown-menu li > a:hover {
   background: var(--st-accent-bg) !important;
   color: var(--st-accent) !important;
 }
 
-.dropdown-header,
-.dropdown-section .dropdown-header {
+.dropdown-header {
   color: var(--st-muted) !important;
   font-size: 11px !important;
   text-transform: uppercase !important;
   letter-spacing: 0.05em !important;
 }
-
-.dropdown-divider {
-  border-color: var(--st-border) !important;
-}
+.dropdown-divider { border-color: var(--st-border) !important; }
 
 
 /* ════════════════════════════════════════════════
@@ -1009,31 +936,18 @@ button:not(.btn-primary):not(.btn-danger):not(.btn-success):not(.btn-warning):no
   box-shadow: var(--st-shadow-pop) !important;
   color: var(--st-text) !important;
 }
-.modal-header {
-  background: transparent !important;
-  border-bottom: 1px solid var(--st-border) !important;
-}
-.modal-title {
-  color: var(--st-text-pri) !important;
-  font-weight: 700 !important;
-}
+.modal-header { background: transparent !important; border-bottom: 1px solid var(--st-border) !important; }
+.modal-title { color: var(--st-text-pri) !important; font-weight: 700 !important; }
 .modal-body { color: var(--st-text) !important; }
-.modal-footer {
-  background: transparent !important;
-  border-top: 1px solid var(--st-border) !important;
-}
+.modal-footer { background: transparent !important; border-top: 1px solid var(--st-border) !important; }
 
 
 /* ════════════════════════════════════════════════
    20. PAINÉIS / CARDS
    ════════════════════════════════════════════════ */
 
-.panel,
-.panel-default,
-.card,
-.well,
-.preview,
-.preview-container,
+.panel, .panel-default, .card, .well,
+.preview, .preview-container,
 [class*="preview"]:not([class*="-img"]):not([class*="-photo"]) {
   background: var(--st-surface) !important;
   border: 1px solid var(--st-border) !important;
@@ -1041,50 +955,33 @@ button:not(.btn-primary):not(.btn-danger):not(.btn-success):not(.btn-warning):no
   box-shadow: var(--st-shadow) !important;
   color: var(--st-text) !important;
 }
-
-.panel-heading,
-.card-header {
+.panel-heading, .card-header {
   background: transparent !important;
   border-bottom: 1px solid var(--st-border) !important;
   color: var(--st-text-pri) !important;
 }
-
-.panel-body,
-.card-body {
-  background: transparent !important;
-  color: var(--st-text) !important;
-}
-
-.panel a,
-.card a { color: var(--st-accent) !important; }
+.panel-body, .card-body { background: transparent !important; color: var(--st-text) !important; }
+.panel a, .card a { color: var(--st-accent) !important; }
 
 
 /* ════════════════════════════════════════════════
    21. TABS DE CONFIGURAÇÃO
    ════════════════════════════════════════════════ */
 
-.nav-tabs,
-.nav-tabs-default {
-  border-bottom-color: var(--st-border) !important;
-}
+.nav-tabs, .nav-tabs-default { border-bottom-color: var(--st-border) !important; }
 
-.nav-tabs .nav-link,
-.nav-tabs .nav-item > a {
+.nav-tabs .nav-link, .nav-tabs .nav-item > a {
   color: var(--st-muted) !important;
   background: transparent !important;
   border: none !important;
   border-bottom: 2px solid transparent !important;
   font-weight: 600 !important;
 }
-
-.nav-tabs .nav-link:hover,
-.nav-tabs .nav-item > a:hover {
+.nav-tabs .nav-link:hover, .nav-tabs .nav-item > a:hover {
   color: var(--st-text) !important;
   background: transparent !important;
 }
-
-.nav-tabs .nav-link.active,
-.nav-tabs .nav-item.active > a {
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.active > a {
   color: var(--st-accent) !important;
   background: transparent !important;
   border-bottom: 2px solid var(--st-accent) !important;
@@ -1093,7 +990,7 @@ button:not(.btn-primary):not(.btn-danger):not(.btn-success):not(.btn-warning):no
 
 
 /* ════════════════════════════════════════════════
-   22. BADGES / LABELS DE ESTADO
+   22. BADGES / LABELS DE ESTADO (APROVADO etc.)
    ════════════════════════════════════════════════ */
 
 .label-success, .badge.label-success, span.label-success,
@@ -1106,7 +1003,6 @@ button:not(.btn-primary):not(.btn-danger):not(.btn-success):not(.btn-warning):no
   letter-spacing: 0.05em !important;
   padding: 3px 8px !important;
 }
-
 .label-success, .badge.label-success, span.label-success {
   background: rgba(125,211,168,0.15) !important;
   border: 1px solid rgba(125,211,168,0.35) !important;
@@ -1138,15 +1034,12 @@ button:not(.btn-primary):not(.btn-danger):not(.btn-success):not(.btn-warning):no
   border-width: 1px !important;
   border-style: solid !important;
 }
-
 .alert-success {
   background: rgba(125,211,168,0.12) !important;
   border-color: rgba(125,211,168,0.35) !important;
   color: #A9E5C5 !important;
 }
-.alert-success .alert-indicator,
-.alert-success .lexicon-icon { color: var(--st-success) !important; }
-
+.alert-success .alert-indicator, .alert-success .lexicon-icon { color: var(--st-success) !important; }
 .alert-warning {
   background: rgba(245,180,97,0.12) !important;
   border-color: rgba(245,180,97,0.35) !important;
@@ -1168,14 +1061,8 @@ button:not(.btn-primary):not(.btn-danger):not(.btn-success):not(.btn-warning):no
    24. BREADCRUMB
    ════════════════════════════════════════════════ */
 
-.breadcrumb {
-  background: transparent !important;
-  padding: 8px 0 !important;
-}
-.breadcrumb-item a {
-  color: var(--st-muted) !important;
-  font-size: 13px;
-}
+.breadcrumb { background: transparent !important; padding: 8px 0 !important; }
+.breadcrumb-item a { color: var(--st-muted) !important; font-size: 13px; }
 .breadcrumb-item a:hover { color: var(--st-accent) !important; }
 .breadcrumb-item.active { color: var(--st-text) !important; font-size: 13px; }
 .breadcrumb-item + .breadcrumb-item::before { color: var(--st-dim) !important; }
@@ -1192,11 +1079,7 @@ button:not(.btn-primary):not(.btn-danger):not(.btn-success):not(.btn-warning):no
   border-radius: var(--st-radius-sm) !important;
   font-size: 12px !important;
 }
-
-::selection {
-  background: rgba(91,163,245,0.30);
-  color: var(--st-text-pri);
-}
+::selection { background: rgba(91,163,245,0.30); color: var(--st-text-pri); }
 
 
 /* ════════════════════════════════════════════════
@@ -1226,11 +1109,11 @@ button:focus-visible,
   .navigation-bar .nav-link,
   .navigation-bar .nav-item > a { padding: 10px 12px !important; }
 
-  .sheet-header,
-  .sheet-section { padding-left: 16px !important; padding-right: 16px !important; }
+  .sheet-header, .sheet-section { padding-left: 16px !important; padding-right: 16px !important; }
 
   .dnd-th, .dnd-td,
-  .table thead th, .table tbody td { padding: 8px 12px !important; }
+  .table thead th, .table tbody td,
+  .table-list thead th, .table-list tbody td { padding: 8px 12px !important; }
 
-  [class*="SiteLogoPortlet"] .site-name { font-size: 16px !important; }
+  a.logo h1 { font-size: 16px !important; }
 }
