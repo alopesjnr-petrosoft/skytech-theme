@@ -937,7 +937,135 @@ ul.list-unstyled .dropdown-item {
 
 
 /* ════════════════════════════════════════════════
-   19. MODAIS
+   18b. MODAIS CUSTOMIZADOS DOS FRAGMENTOS (.modal-mode)
+   Markup real (vários fragmentos, mesma classe-base):
+     div.fragment_XXXX.<algo>-registration.modal-mode.active
+       > form.<prefixo>-form  (mr-form, phr-form, ...)
+         > fieldset.<prefixo>-fieldset-*
+   Tinham fundo branco com títulos/labels escuros (ilegíveis).
+   Mirar .modal-mode cobre TODOS os fragmentos de uma vez.
+   ════════════════════════════════════════════════ */
+
+/* Container do modal */
+.modal-mode,
+.modal-mode.active,
+[class*="-registration"].modal-mode {
+  background: var(--st-surface) !important;
+  color: var(--st-text) !important;
+  border: 1px solid var(--st-border) !important;
+  border-radius: var(--st-radius) !important;
+  box-shadow: var(--st-shadow-pop) !important;
+}
+
+/* Form e fieldsets internos: transparentes (herdam o fundo do modal) */
+.modal-mode form,
+.modal-mode fieldset,
+.modal-mode [class$="-form"],
+.modal-mode [class*="-fieldset"],
+.modal-mode .submit-and-cancel-button {
+  background: transparent !important;
+  border-color: var(--st-border) !important;
+  color: var(--st-text) !important;
+}
+
+/* Títulos de seção do modal (DADOS DO MOTOR / AERONAVE / INFORMAÇÕES...) */
+.modal-mode h1,
+.modal-mode h2,
+.modal-mode h3,
+.modal-mode h4,
+.modal-mode legend,
+.modal-mode .section-title,
+.modal-mode fieldset > legend {
+  color: var(--st-text-pri) !important;
+  border-bottom-color: var(--st-border) !important;
+}
+
+/* Labels dos campos (Modelo, Prefixo, Altitude, etc.) */
+.modal-mode label,
+.modal-mode .control-label,
+.modal-mode .form-label {
+  color: var(--st-muted) !important;
+}
+
+/* Textos auxiliares / "Nenhum arquivo escolhido" */
+.modal-mode,
+.modal-mode p,
+.modal-mode span,
+.modal-mode .form-text {
+  color: var(--st-text) !important;
+}
+
+/* Campos do modal (inputs/selects/textarea) coerentes com o tema */
+.modal-mode input,
+.modal-mode select,
+.modal-mode textarea,
+.modal-mode .form-control {
+  background: var(--st-bg) !important;
+  border: 1px solid var(--st-border-2) !important;
+  color: var(--st-text) !important;
+}
+.modal-mode input:focus,
+.modal-mode select:focus,
+.modal-mode textarea:focus {
+  border-color: var(--st-accent) !important;
+  box-shadow: 0 0 0 3px var(--st-accent-bg) !important;
+  color: var(--st-text-pri) !important;
+}
+.modal-mode input::placeholder,
+.modal-mode textarea::placeholder {
+  color: var(--st-dim) !important;
+}
+
+/* Botão "Escolher arquivo" e similares dentro do modal */
+.modal-mode input[type="file"]::file-selector-button,
+.modal-mode .btn:not(.submit-button) {
+  background: var(--st-surface-2) !important;
+  border: 1px solid var(--st-border-2) !important;
+  color: var(--st-text) !important;
+  border-radius: var(--st-radius-sm) !important;
+}
+
+/* Botão Salvar (submit) e Cancelar */
+.modal-mode .submit-button,
+.modal-mode button[type="submit"] {
+  background: var(--st-accent) !important;
+  border-color: var(--st-accent) !important;
+  color: #fff !important;
+  border-radius: var(--st-radius-sm) !important;
+  font-weight: 600 !important;
+}
+.modal-mode .submit-button:hover,
+.modal-mode button[type="submit"]:hover {
+  background: var(--st-accent-d) !important;
+}
+.modal-mode .cancel-button,
+.modal-mode button[type="button"].cancel-button {
+  background: var(--st-surface-2) !important;
+  border: 1px solid var(--st-border-2) !important;
+  color: var(--st-text) !important;
+  border-radius: var(--st-radius-sm) !important;
+}
+.modal-mode .cancel-button:hover {
+  background: var(--st-surface) !important;
+  color: var(--st-text-pri) !important;
+}
+
+/* Linha divisória entre seções do modal */
+.modal-mode hr,
+.modal-mode fieldset {
+  border-color: var(--st-border) !important;
+}
+
+/* Overlay/backdrop do modal, se houver */
+.modal-mode-overlay,
+.modal-backdrop,
+[class*="modal-overlay"] {
+  background: rgba(5,8,15,0.6) !important;
+}
+
+
+/* ════════════════════════════════════════════════
+   19. MODAIS (Bootstrap / Liferay padrão)
    ════════════════════════════════════════════════ */
 
 .modal-content {
